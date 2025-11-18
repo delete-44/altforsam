@@ -130,8 +130,8 @@ export const generateAltText = function (results) {
   const parts = [];
   if (preamble) parts.push(preamble);
   parts.push(body);
-  if (link) parts.push(link);
   if (unknownLines.length) parts.push(...unknownLines);
+  if (link) parts.push(link);
 
   return parts.join("\n");
 };

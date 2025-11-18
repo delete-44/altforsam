@@ -152,11 +152,18 @@
   })
 
   it("generateAltText: supports variations in preamble format", () => {
-    const testResults = "I solved the daily Clues by Sam (Jan 1st 1970) in less than 20 minutes\nhttps://cluesbysam.com";
+    let testResults = "I solved the daily Clues by Sam (Jan 1st 1970) in less than 20 minutes\nhttps://cluesbysam.com";
 
     assertEqual(
       generateAltText(testResults),
       "I solved the daily Clues by Sam (Jan 1st 1970) in less than 20 minutes\n\nhttps://cluesbysam.com"
+    );
+
+    testResults = "Clues by Sam - Jan 1st 1970\n(Medium)\nLess than 12 minutes\nhttps://cluesbysam.com";
+
+    assertEqual(
+      generateAltText(testResults),
+      "Clues by Sam - Jan 1st 1970\n\n(Medium)\nLess than 12 minutes\nhttps://cluesbysam.com"
     );
   })
 
@@ -170,11 +177,11 @@
   })
 
   it("generateAltText: works with unknown strings & complex results", () => {
-    const testResults = "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n🟩🟨🟡🟠\n🟩🟩🟩🟩\n🟩🟡🟩🟨\n🟩🟠🟨🟩\n🟩🟡🟩🟨\nhttps://cluesbysam.com\nOh my god I did so badly ;-;";
+    const testResults = "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n🟩🟨🟡🟠\n🟩🟩🟩🟩\n🟩🟡🟩🟨\n🟩🟠🟨🟩\n🟩🟡🟩🟨\nOh my god I did so badly ;-;\nhttps://cluesbysam.com";
 
     assertEqual(
       generateAltText(testResults),
-      "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n11 correct guesses. 4 mistakes. 3 hints. 2 double hints.\nhttps://cluesbysam.com\nOh my god I did so badly ;-;"
+      "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n11 correct guesses. 4 mistakes. 3 hints. 2 double hints.\nOh my god I did so badly ;-;\nhttps://cluesbysam.com"
     );
   })
 </script>

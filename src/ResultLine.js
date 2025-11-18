@@ -13,7 +13,7 @@ import { iconMap } from "./consts.js";
  *
  * @type {RegExp}
  */
-const PREAMBLE_REGEX = /^I solved the daily Clues by Sam.*/;
+const PREAMBLE_REGEX = /^(I solved the daily )?Clues by Sam.*/;
 
 /**
  * Regex to match the URL at the end of the results output
