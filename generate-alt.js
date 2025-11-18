@@ -112,19 +112,19 @@ function parseResults(resultsTotals) {
     return "Clean sweep! All correct with no mistakes or hints.";
   }
 
-  let parsedString;
+  let parsedString = "";
 
-  [CORRECT_KEY, MISTAKE_KEY, HINT_KEY, DOUBLE_HINT_KEY].forEach((key) => {
+  [CORRECT_KEY, MISTAKE_KEY, HINT_KEY, DOUBLE_HINT_KEY].forEach((key, idx) => {
     if (resultsTotals[key]) {
-      parsedString += `; ${resultsTotals[key]} ${pluralise(
+      parsedString += `${resultsTotals[key]} ${pluralise(
         resultsTotals[key],
         resultsMeta[key].label,
         resultsMeta[key].suffix
-      )}`;
+      )}. `;
     }
   });
 
-  return parsedString;
+  return parsedString.trim();
 }
 
 /**
@@ -156,9 +156,9 @@ function countResults(resultLine, resultTotals = {}) {
  * @returns {{ preamble: string; body: string; link: string; }}
  */
 const generateAltText = function (results) {
-  let preamble,
-    body,
-    link,
+  let preamble = "",
+    body = "",
+    link = "",
     resultTotals = {
       [CORRECT_KEY]: 0,
       [MISTAKE_KEY]: 0,
@@ -182,12 +182,12 @@ const generateAltText = function (results) {
       return;
     }
 
-    alert("Failed to process line: ", resultLine);
+    console.error("Failed to process line: ", resultLine);
   });
 
   body = parseResults(resultTotals);
 
-  return { preamble, body, link };
+  return `${preamble}\n${body}\n${link}`;
 };
 
 /**
@@ -207,11 +207,13 @@ const handleCopyButtonClick = async function () {
     return;
   }
 
-  const { preamble, body, link } = generateAltText(resultsInput.value);
+  const altText = generateAltText(resultsInput.value);
 
-  await navigator.clipboard.writeText(`${preamble}\n${body}\n${link}`);
+  await navigator.clipboard.writeText(altText);
 };
 
 window.pluralise = pluralise;
 window.parseResults = parseResults;
+window.countResults = countResults;
+window.generateAltText = generateAltText;
 window.handleCopyButtonClick = handleCopyButtonClick;

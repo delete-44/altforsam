@@ -11,31 +11,31 @@
   // Pluralise
   // -------------------
 
-  it('pluralise: when count is 0', () => {
+  it("pluralise: pluralises when count is 0", () => {
     assertEqual(
-      pluralise(0, 'eddie'),
-      'eddies'
+      pluralise(0, "eddie"),
+      "eddies"
     );
   });
 
-  it('pluralise: when count is negative', () => {
+  it("pluralise: pluralises when count is negative", () => {
     assertEqual(
-      pluralise(-20, 'eddie'),
-      'eddies'
+      pluralise(-20, "eddie"),
+      "eddies"
     );
   });
 
-  it('pluralise: when count is positive', () => {
+  it("pluralise: pluralises when count is positive", () => {
     assertEqual(
-      pluralise(20, 'eddie'),
-      'eddies'
+      pluralise(20, "eddie"),
+      "eddies"
     );
   });
 
-  it('pluralise: when count is 1', () => {
+  it("pluralise: does not pluralise when count is 1", () => {
     assertEqual(
-      pluralise(1, 'eddie'),
-      'eddie'
+      pluralise(1, "eddie"),
+      "eddie"
     );
   });
 
@@ -43,5 +43,125 @@
   // parseResults
   // -------------------
 
-  // ...
+  it("parseResults: works with missing keys", () => {
+    const testResults = { correct: 2 }
+
+    assertEqual(
+      parseResults(testResults),
+      "2 correct guesses."
+    );
+  });
+
+  it("parseResults: ignores invalid keys", () => {
+    const testResults = { correct: 5, faker: 100, hint: 5 }
+
+    assertEqual(
+      parseResults(testResults),
+      "5 correct guesses. 5 hints."
+    );
+  })
+
+  it("parseResults: correctly orders output with a mix of all valid keys", () => {
+    const testResults = { doubleHint: 10, correct: 4, mistake: 1, hint: 5 }
+
+    assertEqual(
+      parseResults(testResults),
+      "4 correct guesses. 1 mistake. 5 hints. 10 double hints."
+    );
+  })
+
+  it("parseResults: renders a nicer message when all are correct", () => {
+    const testResults = { correct: 20 }
+
+    assertEqual(
+      parseResults(testResults),
+      "Clean sweep! All correct with no mistakes or hints."
+    );
+  })
+
+  // -------------------
+  // countResults
+  // -------------------
+
+  it("countResults: instatiates items missing in accumulator", () => {
+    const resultTotals = {}
+    const testResultLine = "🟩🟩🟩🟨"
+
+    assertEqual(
+      countResults(testResultLine, resultTotals),
+      { correct: 3, mistake: 1 }
+    );
+  })
+
+  it("countResults: ignores invalid keys", () => {
+    const resultTotals = {}
+    const testResultLine = "🟩👁️🟩🟨"
+
+    assertEqual(
+      countResults(testResultLine, resultTotals),
+      { correct: 2, mistake: 1 }
+    );
+  })
+
+  it("countResults: adds new counts to existing accumulator", () => {
+    const resultTotals = { correct: 8, hint: 2, doubleHint: 5, mistake: 1 }
+    const testResultLine = "🟩🟨🟡🟠"
+
+    countResults(testResultLine, resultTotals);
+
+    assertEqual(
+      resultTotals,
+      { correct: 9, hint: 3, doubleHint: 6, mistake: 2 }
+    );
+  })
+
+  it("countResults: returns updated counts", () => {
+    const resultTotals = { correct: 8, hint: 2, doubleHint: 5, mistake: 1 }
+    const testResultLine = "🟩🟨🟡🟠"
+
+    assertEqual(
+      countResults(testResultLine, resultTotals),
+      { correct: 9, hint: 3, doubleHint: 6, mistake: 2 }
+    );
+  })
+
+  // -------------------
+  // generateAltText
+  // -------------------
+
+  it("generateAltText: returns nothing if no regexes match", () => {
+    const testResults = "hi i'm eddie";
+
+    assertEqual(
+      generateAltText(testResults),
+      "\n\n"
+    );
+  })
+
+  it("generateAltText: returns preamble & link", () => {
+    const testResults = "I solved the daily Clues by Sam, Jan 1st 1970 (Evil), in 00:00\nhttps://cluesbysam.com";
+
+    assertEqual(
+      generateAltText(testResults),
+      "I solved the daily Clues by Sam, Jan 1st 1970 (Evil), in 00:00\n\nhttps://cluesbysam.com"
+    );
+  })
+
+  it("generateAltText: supports variations in preamble format", () => {
+    const testResults = "I solved the daily Clues by Sam (Jan 1st 1970) in less than 20 minutes\nhttps://cluesbysam.com";
+
+    assertEqual(
+      generateAltText(testResults),
+      "I solved the daily Clues by Sam (Jan 1st 1970) in less than 20 minutes\n\nhttps://cluesbysam.com"
+    );
+  })
+
+  it("generateAltText: accumulates multiple rows of results", () => {
+    const testResults = "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n🟩🟩🟩🟩\n🟩🟩🟩🟩\n🟩🟩🟩🟨\n🟩🟩🟩🟩\n🟩🟩🟩🟩\nhttps://cluesbysam.com";
+
+    assertEqual(
+      generateAltText(testResults),
+      "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n19 correct guesses. 1 mistake.\nhttps://cluesbysam.com"
+    );
+  })
 </script>
