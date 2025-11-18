@@ -1,11 +1,10 @@
 <meta charset="utf-8">
-<script src="./generate-alt.js"></script>
-
-
 <link rel="stylesheet" href="./test-micro-framework/test-micro-framework.css">
 
 <script type="module">
   import { it, assertEqual } from "./test-micro-framework/test-micro-framework.js"
+  import { pluralise, parseResults, mergeCounts, generateAltText } from "./src/generate-alt.js";
+  import { ResultLine } from "./src/ResultLine.js";
 
   // -------------------
   // Pluralise
@@ -80,47 +79,52 @@
   })
 
   // -------------------
-  // countResults
+  // mergeCounts
   // -------------------
 
-  it("countResults: instatiates items missing in accumulator", () => {
+  it("mergeCounts: instantiates items missing in accumulator", () => {
     const resultTotals = {}
-    const testResultLine = "🟩🟩🟩🟨"
+    const testResultLine = new ResultLine("🟩🟩🟩🟨");
 
     assertEqual(
-      countResults(testResultLine, resultTotals),
+      mergeCounts(resultTotals, testResultLine.counts()),
       { correct: 3, mistake: 1 }
     );
   })
 
-  it("countResults: ignores invalid keys", () => {
+  it("mergeCounts: ignores invalid keys", () => {
     const resultTotals = {}
-    const testResultLine = "🟩👁️🟩🟨"
+    const testResultLine = new ResultLine("🟩👁️🟩🟨")
 
     assertEqual(
-      countResults(testResultLine, resultTotals),
+      mergeCounts(resultTotals, testResultLine.counts()),
       { correct: 2, mistake: 1 }
     );
   })
 
-  it("countResults: adds new counts to existing accumulator", () => {
+  it("mergeCounts: does not modify the existing object", () => {
     const resultTotals = { correct: 8, hint: 2, doubleHint: 5, mistake: 1 }
-    const testResultLine = "🟩🟨🟡🟠"
+    const testResultLine = new ResultLine("🟩🟨🟡🟠")
 
-    countResults(testResultLine, resultTotals);
+    const updatedTotals = mergeCounts(resultTotals, testResultLine.counts());
 
     assertEqual(
       resultTotals,
+      { correct: 8, hint: 2, doubleHint: 5, mistake: 1 }
+    );
+
+    assertEqual(
+      updatedTotals,
       { correct: 9, hint: 3, doubleHint: 6, mistake: 2 }
     );
   })
 
-  it("countResults: returns updated counts", () => {
+  it("mergeCounts: returns modified object", () => {
     const resultTotals = { correct: 8, hint: 2, doubleHint: 5, mistake: 1 }
-    const testResultLine = "🟩🟨🟡🟠"
+    const testResultLine = new ResultLine("🟩🟨🟡🟠")
 
     assertEqual(
-      countResults(testResultLine, resultTotals),
+      mergeCounts(resultTotals, testResultLine.counts()),
       { correct: 9, hint: 3, doubleHint: 6, mistake: 2 }
     );
   })
@@ -129,12 +133,12 @@
   // generateAltText
   // -------------------
 
-  it("generateAltText: returns nothing if no regexes match", () => {
+  it("generateAltText: preserves unrecognised lines", () => {
     const testResults = "hi i'm eddie";
 
     assertEqual(
       generateAltText(testResults),
-      "\n\n"
+      "\nhi i'm eddie"
     );
   })
 
@@ -162,6 +166,15 @@
     assertEqual(
       generateAltText(testResults),
       "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n19 correct guesses. 1 mistake.\nhttps://cluesbysam.com"
+    );
+  })
+
+  it("generateAltText: works with unknown strings & complex results", () => {
+    const testResults = "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n🟩🟨🟡🟠\n🟩🟩🟩🟩\n🟩🟡🟩🟨\n🟩🟠🟨🟩\n🟩🟡🟩🟨\nhttps://cluesbysam.com\nOh my god I did so badly ;-;";
+
+    assertEqual(
+      generateAltText(testResults),
+      "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n11 correct guesses. 4 mistakes. 3 hints. 2 double hints.\nhttps://cluesbysam.com\nOh my god I did so badly ;-;"
     );
   })
 </script>
