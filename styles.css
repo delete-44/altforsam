@@ -2,10 +2,16 @@
   --text: #4f5264;
   --text-title: #393c4d;
   --bg: #fff9ee;
+  --bg-highlight: #f0ecde;
 
-  --control: #afafaf47;
-  --control-highlight: #9e9ca7;
+  --control: var(--bg);
+  --control-border: #9e9ca7;
+  --control-highlight: #ebe6d9;
   --control-border-radius: 4px;
+
+  --spacing-s: 6px;
+  --spacing-m: 10px;
+  --spacing-l: 16px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,9 +19,11 @@
     --text: #ffffff;
     --text-title: #ffffff;
     --bg: #1a1d24;
+    --bg-highlight: #0000002c;
 
     --control: var(--bg);
-    --control-highlight: #4a4b55;
+    --control-border: #4a4b55;
+    --control-highlight: #202531;
   }
 }
 
@@ -35,31 +43,47 @@ body {
   line-height: 1.6;
   max-width: 600px;
   margin: 0 auto;
+
+  @media screen and (max-width: 600px) {
+    margin: 0 var(--spacing-l);
+  }
 }
 
 /* ---------------------------------- */
 /* ----------- Typography ----------- */
 /* ---------------------------------- */
 
-p, legend {
+p,
+legend,
+label,
+textarea {
   color: var(--text);
 }
 
 h1,
 h2 {
+  margin-block-start: 2rem;
+  margin-block-end: 0.5rem;
+
   font-weight: bold;
-  margin-block-start: 2em;
-  margin-block-end: 0.5em;
   color: var(--text-title);
   text-align: center;
 }
 
 h1 {
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
-h2 {
-  font-size: 1.17em;
+h2,
+legend {
+  font-size: 1.15rem;
+}
+
+p,
+label,
+button,
+textarea {
+  font-size: 1rem;
 }
 
 /* ---------------------------------- */
@@ -67,26 +91,39 @@ h2 {
 /* ---------------------------------- */
 
 fieldset {
-  border: 2px solid var(--control-highlight);
+  border: 2px solid var(--control-border);
   border-radius: var(--control-border-radius);
+  padding: var(--spacing-m);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s);
 }
 
 legend {
-  font-size: 1em;
-  padding: 0 6px;
+  padding: 0;
 }
 
 button {
-  padding: 10px 16px;
-  background-color: var(--control);
-  border: 2px solid var(--control-highlight);
-  border-radius: var(--control-border-radius);
+  padding: var(--spacing-m) var(--spacing-l);
   color: var(--text);
-  font-size: 14px;
+  background-color: var(--control);
+  border: 2px solid var(--control-border);
+  border-radius: var(--control-border-radius);
   transition: all 0.2s ease;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: var(--control-highlight);
   }
+}
+
+textarea {
+  resize: vertical;
+  padding: var(--spacing-m);
+  color: var(--text);
+  background-color: var(--control-highlight);
+  border: 2px solid var(--control-border);
+  border-radius: var(--control-border-radius);
 }

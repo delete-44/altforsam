@@ -21,9 +21,12 @@
 
   <main>
     <fieldset>
-      <legend>Paste your results here</legend>
-      <textarea id="results-input" rows="8" cols="6"></textarea>
-
+      <legend>Generate alt text</legend>
+      <label for="results-input">Paste your results here</label>
+      <br />
+      <textarea id="results-input" rows="10" cols="10" autofocus="true"
+        placeholder="I solved the daily Clues By Sam..."></textarea>
+      <br />
       <button>📋 Copy alt to clipboard</button>
 
     </fieldset>
@@ -36,9 +39,11 @@
 
   <h2 id="why">Why do this?</h2>
 
-  <p>Pasting your emoji results into a post and firing it into the world will be a rough experience for assistive technology such as screenreaders.</p>
+  <p>Pasting your emoji results into a post and firing it into the world will be a rough experience for assistive
+    technology such as screenreaders.</p>
   <p>For example a result could read "Green square, Yellow square, Green square" and so on for all twenty choices.</p>
-  <p>This website simply compiles your results and generates a prettier string of text that will be friendlier to screenreaders!</p>
+  <p>This website simply compiles your results and generates a prettier string of text that will be friendlier to
+    screenreaders!</p>
   <p>For example we'll convert it to "Four clues used, two mistakes made"</p>
   <script src="" async defer></script>
 </body>
