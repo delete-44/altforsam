@@ -126,4 +126,8 @@ textarea {
   background-color: var(--control-highlight);
   border: 2px solid var(--control-border);
   border-radius: var(--control-border-radius);
+
+  &:disabled {
+    background-color: var(--bg);
+  }
 }
