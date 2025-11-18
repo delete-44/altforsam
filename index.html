@@ -27,7 +27,7 @@
       <textarea id="results-input" rows="10" cols="10" autofocus="true"
         placeholder="I solved the daily Clues By Sam..."></textarea>
       <br />
-      <button>📋 Copy alt to clipboard</button>
+      <button id="copy-button" onclick="handleCopyButtonClick()">📋 Copy alt to clipboard</button>
 
     </fieldset>
   </main>
@@ -45,7 +45,8 @@
   <p>This website simply compiles your results and generates a prettier string of text that will be friendlier to
     screenreaders!</p>
   <p>For example we'll convert it to "Four clues used, two mistakes made"</p>
-  <script src="" async defer></script>
+
+  <script src="./generate-alt.js" async defer></script>
 </body>
 
 </html>
