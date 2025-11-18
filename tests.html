@@ -1,0 +1,47 @@
+<meta charset="utf-8">
+<script src="./generate-alt.js"></script>
+
+
+<link rel="stylesheet" href="./test-micro-framework/test-micro-framework.css">
+
+<script type="module">
+  import { it, assertEqual } from "./test-micro-framework/test-micro-framework.js"
+
+  // -------------------
+  // Pluralise
+  // -------------------
+
+  it('pluralise: when count is 0', () => {
+    assertEqual(
+      pluralise(0, 'eddie'),
+      'eddies'
+    );
+  });
+
+  it('pluralise: when count is negative', () => {
+    assertEqual(
+      pluralise(-20, 'eddie'),
+      'eddies'
+    );
+  });
+
+  it('pluralise: when count is positive', () => {
+    assertEqual(
+      pluralise(20, 'eddie'),
+      'eddies'
+    );
+  });
+
+  it('pluralise: when count is 1', () => {
+    assertEqual(
+      pluralise(1, 'eddie'),
+      'eddie'
+    );
+  });
+
+  // -------------------
+  // parseResults
+  // -------------------
+
+  // ...
+</script>

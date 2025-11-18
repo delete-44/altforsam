@@ -1,0 +1,25 @@
+.test-result {
+  padding: 6px;
+  border-radius: 4px;
+  display: block;
+}
+
+.success {
+  border: 1px solid #165506;
+  background-color: #bfefb3;
+
+  &::before {
+    content: "✅";
+    padding: 6px;
+  }
+}
+
+.failure {
+  border: 1px solid #790707;
+  background-color: #ffb1b1;
+
+  &::before {
+    content: "⛔️";
+    padding: 6px;
+  }
+}
