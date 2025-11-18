@@ -112,6 +112,7 @@ button {
   border-radius: var(--control-border-radius);
   transition: all 0.2s ease;
   cursor: pointer;
+  margin-bottom: var(--spacing-l);
 
   &:hover,
   &:focus {

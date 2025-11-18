@@ -1,6 +1,11 @@
 import { iconMap } from "./consts.js";
 
 /**
+ * @typedef {Record<typeof CORRECT_KEY | typeof MISTAKE_KEY | typeof HINT_KEY | typeof DOUBLE_HINT_KEY, number>} TResultTotalsItem
+ * ie { correct: 1, mistake: 16, hint: 2, doubleHint: 1 }
+ */
+
+/**
  * Regex to match the first line of text
  * To match:
  * * "I solved the daily Clues by Sam, Nov 17th 2025 (Easy), in 02:50"
@@ -20,7 +25,6 @@ const PREAMBLE_REGEX = /^I solved the daily Clues by Sam.*/;
 const LINK_REGEX = /https:\/\/cluesbysam.com/;
 
 /**
- * Description placeholder
  * To match the results as declared in cluesbysam:
  * > 🟩 means you correctly identified the person
  * > 🟨 means you made at least one mistake identifying the person
@@ -37,20 +41,39 @@ export class ResultLine {
     this.text = text || "";
   }
 
+  /**
+   * Utility function for test PREAMBLE_REGEX
+   *
+   * @returns {boolean}
+   */
   isPreamble() {
     return PREAMBLE_REGEX.test(this.text);
   }
 
+  /**
+   * Utility function for test LINK_REGEX
+   *
+   * @returns {boolean}
+   */
   isLink() {
     return LINK_REGEX.test(this.text);
   }
 
+  /**
+   * Utility function for test RESULT_REGEX
+   *
+   * @returns {boolean}
+   */
   isResultRow() {
     // match even if there is surrounding whitespace
     return RESULT_REGEX.test(this.text);
   }
 
-  // returns an object with counts for this line (may be empty)
+  /**
+   * returns an object with counts for this line (may be empty)
+   *
+   * @returns {TResultTotalsItem}
+   */
   counts() {
     const totals = {};
     if (this.isPreamble() || this.isLink()) return totals;
