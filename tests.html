@@ -92,6 +92,16 @@
     );
   })
 
+  it("mergeCounts: does not match unknown strings", () => {
+    const resultTotals = {}
+    const testResultLine = new ResultLine(":large_green_square::eye::large_green_square::large_yellow_square:")
+
+    assertEqual(
+      mergeCounts(resultTotals, testResultLine.counts()),
+      { correct: 2, mistake: 1 }
+    );
+  });
+
   it("mergeCounts: ignores invalid keys", () => {
     const resultTotals = {}
     const testResultLine = new ResultLine("🟩👁️🟩🟨")
@@ -128,6 +138,16 @@
       { correct: 9, hint: 3, doubleHint: 6, mistake: 2 }
     );
   })
+
+  it("mergeCounts: recognises string variants of emojis", () => {
+    const resultTotals = { correct: 1, hint: 2, doubleHint: 3, mistake: 4 }
+    const testResultLine = new ResultLine(":large_green_square::large_yellow_square::large_yellow_circle::large_orange_circle:")
+
+    assertEqual(
+      mergeCounts(resultTotals, testResultLine.counts()),
+      { correct: 2, hint: 3, doubleHint: 4, mistake: 5 }
+    );
+  });
 
   // -------------------
   // generateAltText
@@ -182,6 +202,21 @@
     assertEqual(
       generateAltText(testResults),
       "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n11 correct guesses. 4 mistakes. 3 hints. 2 double hints.\nOh my god I did so badly ;-;\nhttps://cluesbysam.com"
+    );
+  })
+
+  it("generateAltText: matchs string emojis in complex results", () => {
+    const testResults = "I solved the daily Clues by Sam, Jan 1st 1970 (Medium), in less than 20 minutes\n"
+      + ":large_yellow_circle::large_green_square::large_green_square::large_yellow_square:\n"
+      + ":large_green_square::large_green_square::large_green_square::large_green_square:\n"
+      + ":large_green_square::large_green_square::large_green_square::large_green_square:\n"
+      + ":large_green_square::large_green_square::large_green_square::large_yellow_square:\n"
+      + ":large_green_square::large_green_square::large_orange_circle::large_green_square:\n"
+      + "https://cluesbysam.com"
+
+    assertEqual(
+      generateAltText(testResults),
+      "I solved the daily Clues by Sam, Jan 1st 1970 (Medium), in less than 20 minutes\n16 correct guesses. 2 mistakes. 1 hint. 1 double hint.\nhttps://cluesbysam.com"
     );
   })
 </script>

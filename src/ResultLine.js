@@ -1,4 +1,10 @@
-import { iconMap } from "./consts.js";
+import {
+  CORRECT_REGEX,
+  DOUBLE_HINT_REGEX,
+  HINT_REGEX,
+  iconMap,
+  MISTAKE_REGEX,
+} from "./consts.js";
 
 /**
  * @typedef {Record<typeof CORRECT_KEY | typeof MISTAKE_KEY | typeof HINT_KEY | typeof DOUBLE_HINT_KEY, number>} TResultTotalsItem
@@ -34,7 +40,10 @@ const LINK_REGEX = /https:\/\/cluesbysam.com/;
  *
  * @type {RegExp}
  */
-const RESULT_REGEX = /[🟩🟨🟡🟠]{8}/;
+export const RESULT_REGEX = new RegExp(
+  `${CORRECT_REGEX.source}|${MISTAKE_REGEX.source}|${HINT_REGEX.source}|${DOUBLE_HINT_REGEX.source}`,
+  "g"
+);
 
 export class ResultLine {
   constructor(text) {
@@ -76,14 +85,21 @@ export class ResultLine {
    */
   counts() {
     const totals = {};
-    if (this.isPreamble() || this.isLink()) return totals;
-    for (const ch of this.text) {
-      const key = iconMap[ch];
 
-      if (!key) continue;
+    if (!this.isResultRow()) return totals;
 
-      totals[key] = (totals[key] || 0) + 1;
+    const matches = this.text.match(RESULT_REGEX);
+
+    if (matches) {
+      for (const match of matches) {
+        const key = iconMap[match];
+
+        if (!key) continue;
+
+        totals[key] = (totals[key] || 0) + 1;
+      }
     }
+
     return totals;
   }
 }

@@ -30,7 +30,17 @@ export const DOUBLE_HINT_KEY = "doubleHint";
  */
 export const iconMap = {
   "🟩": CORRECT_KEY,
+  ":large_green_square:": CORRECT_KEY,
   "🟨": MISTAKE_KEY,
+  ":large_yellow_square:": MISTAKE_KEY,
   "🟡": HINT_KEY,
+  ":large_yellow_circle:": HINT_KEY,
   "🟠": DOUBLE_HINT_KEY,
+  ":large_orange_circle:": DOUBLE_HINT_KEY,
 };
+
+// Define standard patterns for emoji categories
+export const CORRECT_REGEX = /🟩|:large_green_square:/;
+export const MISTAKE_REGEX = /🟨|:large_yellow_square:/;
+export const HINT_REGEX = /🟡|:large_yellow_circle:/;
+export const DOUBLE_HINT_REGEX = /🟠|:large_orange_circle:/;
