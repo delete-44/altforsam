@@ -4,7 +4,7 @@
   font-family: "ComicRelief";
   font-style: normal;
   font-weight: 400;
-  src: url(./fonts/ComicRelief-Regular.ttf) format("truetype");
+  src: url(./assets/ComicRelief-Regular.ttf) format("truetype");
 }
 
 :root {
