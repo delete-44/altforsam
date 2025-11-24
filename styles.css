@@ -18,6 +18,9 @@
   --control-highlight: #ebe6d9;
   --control-border-radius: 4px;
 
+  --link: #bc08d4;
+  --link-highlight: #535bf2;
+
   --spacing-s: 6px;
   --spacing-m: 10px;
   --spacing-l: 16px;
@@ -33,6 +36,9 @@
     --control: var(--bg);
     --control-border: #4a4b55;
     --control-highlight: #202531;
+
+    --link: #e44ff7;
+    --link-highlight: #9095fa;
   }
 }
 
@@ -63,10 +69,22 @@ body {
 /* ---------------------------------- */
 
 p,
+li,
 legend,
 label,
 textarea {
   color: var(--text);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: var(--link-highlight);
+    text-decoration: underline;
+  }
 }
 
 h1,
@@ -89,6 +107,7 @@ legend {
 }
 
 p,
+li,
 label,
 button,
 textarea {

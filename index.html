@@ -6,19 +6,19 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="./assets/favicon.ico">
+  <link rel="icon" href="./assets/favicon.ico">
 
   <!-- HTML Meta Tags -->
   <title>Alt For Sam</title>
   <meta name="description"
-    content="Generate alt text for CluesBySam games to share them in a way that's friendly to assistive technology.">
+    content="Completed your Clues By Sam game? Great! Come here to compile your results into a simplified, screenreader-friendly report that you can share on social media.">
 
   <!-- Facebook Meta Tags -->
   <meta property="og:url" content="https://altforsam.delete44.com/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Alt For Sam">
   <meta property="og:description"
-    content="Generate alt text for CluesBySam games to share them in a way that's friendly to assistive technology.">
+    content="Completed your Clues By Sam game? Great! Come here to compile your results into a simplified, screenreader-friendly report that you can share on social media.">
   <meta property="og:image" content="https://altforsam.delete44.com/assets/header.png">
 
   <!-- Twitter Meta Tags -->
@@ -27,7 +27,7 @@
   <meta property="twitter:url" content="https://altforsam.delete44.com/">
   <meta name="twitter:title" content="Alt For Sam">
   <meta name="twitter:description"
-    content="Generate alt text for CluesBySam games to share them in a way that's friendly to assistive technology.">
+    content="Completed your Clues By Sam game? Great! Come here to compile your results into a simplified, screenreader-friendly report that you can share on social media.">
   <meta name="twitter:image" content="https://altforsam.delete44.com/assets/header.png">
 
   <link rel="stylesheet" href="./styles.css">
@@ -36,12 +36,15 @@
 <body>
   <h1>Alt For Sam</h1>
 
-  <p>Generate alt text from your Clue By Sam scores that will read better to assistive technology.</p>
+  <p>Generate streamlined alt text from your <a href="https://www.cluesbysam.com" target="_blank"
+      rel="noopener noreferer">Clues By
+      Sam</a> results that will be easier to read for assistive technology.
+  </p>
 
   <main>
     <fieldset>
       <legend>Generate alt text</legend>
-      <label for="results-input">Paste your results here</label>
+      <label for="results-input">Paste Clues By Sam results here</label>
 
       <textarea id="results-input" rows="10" cols="10" autofocus="true"
         placeholder="I solved the daily Clues By Sam..."></textarea>
@@ -55,18 +58,24 @@
   </main>
 
   <h2 id="how">How to use</h2>
-  <p>Once you complete your CluesBySam game, copy the text result and paste it into the box above</p>
-  <p>Then, clicking the "Copy alt to clipboard" button will copy nicer formatted alt text to your clipboard</p>
-  <p>To share your results on social media, post a screenshot with the copied text set as "alt text"</p>
+  <ul>
+    <li>
+      Once you complete your <a href="https://www.cluesbysam.com" target="_blank" rel="noopener noreferer">Clues By
+        Sam</a> game, copy the result and paste it into the field above
+    </li>
+    <li>You will see a live preview of the generated alt text in the preview field. Verify you are happy with the
+      changes here</li>
+    <li>Then, click the "Copy alt to clipboard" button to copy this formatted text</li>
+    <li>To share your results on social media, you can post a screenshot. Paste this text into the alt text field</li>
+  </ul>
 
   <h2 id="why">Why do this?</h2>
 
-  <p>Pasting your emoji results into a post and firing it into the world will be a rough experience for assistive
-    technology such as screenreaders.</p>
+  <p>Pasting your emoji results directly into a post will create friction for users of assistive technology, such as
+    screenreaders.</p>
   <p>For example a result could read "Green square, Yellow square, Green square" and so on for all twenty choices.</p>
-  <p>This website simply compiles your results and generates a prettier string of text that will be friendlier to
-    screenreaders!</p>
-  <p>For example we'll convert it to "Four clues used, two mistakes made"</p>
+  <p>This website simply compiles your results and generates a shorter string of text that will be read out nicely!</p>
+  <p>For example we'll convert your almost-perfect score to "19 correct guesses. 1 hint".</p>
 
   <script src="./index.js" async defer type="module"></script>
 </body>
