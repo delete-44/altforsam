@@ -194,7 +194,10 @@
 
     assertEqual(
       generateAltText(testResults),
-      "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n19 correct guesses. 1 mistake.\nhttps://cluesbysam.com"
+      "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n"
+      + "19 correct guesses. 1 mistake.\n"
+      + "https://cluesbysam.com\n\n"
+      + "Full Results:\n🟩🟩🟩🟩\n🟩🟩🟩🟩\n🟩🟩🟩🟨\n🟩🟩🟩🟩\n🟩🟩🟩🟩"
     );
   })
 
@@ -203,7 +206,11 @@
 
     assertEqual(
       generateAltText(testResults),
-      "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n11 correct guesses. 4 mistakes. 3 hints. 2 double hints.\nOh my god I did so badly ;-;\nhttps://cluesbysam.com"
+      "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n"
+      + "11 correct guesses. 4 mistakes. 3 hints. 2 double hints.\n"
+      + "Oh my god I did so badly ;-;\n"
+      + "https://cluesbysam.com\n\n"
+      + "Full Results:\n🟩🟨🟡🟠\n🟩🟩🟩🟩\n🟩🟡🟩🟨\n🟩🟠🟨🟩\n🟩🟡🟩🟨"
     );
   })
 
@@ -218,7 +225,15 @@
 
     assertEqual(
       generateAltText(testResults),
-      "I solved the daily Clues by Sam, Jan 1st 1970 (Medium), in less than 20 minutes\n16 correct guesses. 2 mistakes. 1 hint. 1 double hint.\nhttps://cluesbysam.com"
+      "I solved the daily Clues by Sam, Jan 1st 1970 (Medium), in less than 20 minutes\n"
+      + "16 correct guesses. 2 mistakes. 1 hint. 1 double hint.\n"
+      + "https://cluesbysam.com\n\n"
+      + "Full Results:\n"
+      + ":large_yellow_circle::large_green_square::large_green_square::large_yellow_square:\n"
+      + ":large_green_square::large_green_square::large_green_square::large_green_square:\n"
+      + ":large_green_square::large_green_square::large_green_square::large_green_square:\n"
+      + ":large_green_square::large_green_square::large_green_square::large_yellow_square:\n"
+      + ":large_green_square::large_green_square::large_orange_circle::large_green_square:"
     );
   })
 </script>

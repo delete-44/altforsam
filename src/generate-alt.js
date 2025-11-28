@@ -100,6 +100,7 @@ export const generateAltText = function (results) {
     [HINT_KEY]: 0,
     [DOUBLE_HINT_KEY]: 0,
   };
+  let rawResultLines = [];
 
   results.split("\n").forEach((rawLine) => {
     const line = new ResultLine(rawLine);
@@ -117,6 +118,7 @@ export const generateAltText = function (results) {
 
     if (line.isResultRow()) {
       resultTotals = mergeCounts(resultTotals, line.counts());
+      rawResultLines.push(rawLine);
       return;
     }
 
@@ -132,6 +134,11 @@ export const generateAltText = function (results) {
   parts.push(body);
   if (unknownLines.length) parts.push(...unknownLines);
   if (link) parts.push(link);
+
+  if (rawResultLines.length) {
+    parts.push("\nFull Results:");
+    parts.push(...rawResultLines);
+  }
 
   return parts.join("\n");
 };
