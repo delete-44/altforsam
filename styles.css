@@ -64,6 +64,17 @@ body {
   }
 }
 
+footer {
+  padding: var(--spacing-l) 0;
+  text-align: center;
+
+  & p {
+    margin: 0 var(--spacing-s);
+    display: inline-block;
+    text-align: center;
+  }
+}
+
 /* ---------------------------------- */
 /* ----------- Typography ----------- */
 /* ---------------------------------- */
@@ -114,6 +125,9 @@ textarea {
   font-size: 1rem;
 }
 
+ul {
+  padding-left: var(--spacing-l);
+}
 /* ---------------------------------- */
 /* ------------ Controls ------------ */
 /* ---------------------------------- */
