@@ -155,12 +155,36 @@
   // generateAltText
   // -------------------
 
+  it("generateAltText: always injects links to resources", () => {
+    const testResults = "";
+
+    assertEqual(
+      generateAltText(testResults),
+      "\nQuick Links:\nClues By Sam: https://cluesbysam.com\nAlt For Sam: https://altforsam.delete44.com"
+    );
+  })
+
+  it("generateAltText: ignores many copies of ignored lines", () => {
+    const testResults = "https://cluesbysam.com\n"
+      + "https://cluesbysam.com\n"
+      + "https://cluesbysam.com\n"
+      + "https://altforsam.delete44.com\n"
+      + "https://altforsam.delete44.com\n"
+      + "https://altforsam.delete44.com";
+
+    assertEqual(
+      generateAltText(testResults),
+      "\nQuick Links:\nClues By Sam: https://cluesbysam.com\nAlt For Sam: https://altforsam.delete44.com"
+    );
+  })
+
   it("generateAltText: preserves unrecognised lines", () => {
     const testResults = "hi i'm eddie";
 
     assertEqual(
       generateAltText(testResults),
-      "\nhi i'm eddie"
+      "hi i'm eddie\n"
+      + "\nQuick Links:\nClues By Sam: https://cluesbysam.com\nAlt For Sam: https://altforsam.delete44.com"
     );
   })
 
@@ -169,7 +193,8 @@
 
     assertEqual(
       generateAltText(testResults),
-      "I solved the daily Clues by Sam, Jan 1st 1970 (Evil), in 00:00\n\nhttps://cluesbysam.com"
+      "I solved the daily Clues by Sam, Jan 1st 1970 (Evil), in 00:00\n"
+      + "\nQuick Links:\nClues By Sam: https://cluesbysam.com\nAlt For Sam: https://altforsam.delete44.com"
     );
   })
 
@@ -178,14 +203,18 @@
 
     assertEqual(
       generateAltText(testResults),
-      "I solved the daily Clues by Sam (Jan 1st 1970) in less than 20 minutes\n\nhttps://cluesbysam.com"
+      "I solved the daily Clues by Sam (Jan 1st 1970) in less than 20 minutes\n"
+      + "\nQuick Links:\nClues By Sam: https://cluesbysam.com\nAlt For Sam: https://altforsam.delete44.com"
     );
 
     testResults = "Clues by Sam - Jan 1st 1970\n(Medium)\nLess than 12 minutes\nhttps://cluesbysam.com";
 
     assertEqual(
       generateAltText(testResults),
-      "Clues by Sam - Jan 1st 1970\n\n(Medium)\nLess than 12 minutes\nhttps://cluesbysam.com"
+      "Clues by Sam - Jan 1st 1970\n"
+      + "(Medium)\n"
+      + "Less than 12 minutes\n"
+      + "\nQuick Links:\nClues By Sam: https://cluesbysam.com\nAlt For Sam: https://altforsam.delete44.com"
     );
   })
 
@@ -196,8 +225,8 @@
       generateAltText(testResults),
       "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n"
       + "19 correct guesses. 1 mistake.\n"
-      + "https://cluesbysam.com\n\n"
-      + "Full Results:\n🟩🟩🟩🟩\n🟩🟩🟩🟩\n🟩🟩🟩🟨\n🟩🟩🟩🟩\n🟩🟩🟩🟩"
+      + "\nQuick Links:\nClues By Sam: https://cluesbysam.com\nAlt For Sam: https://altforsam.delete44.com\n"
+      + "\nFull Results:\n🟩🟩🟩🟩\n🟩🟩🟩🟩\n🟩🟩🟩🟨\n🟩🟩🟩🟩\n🟩🟩🟩🟩"
     );
   })
 
@@ -209,8 +238,8 @@
       "I solved the daily Clues by Sam, (Jan 1st 1970) in less than 20 minutes\n"
       + "11 correct guesses. 4 mistakes. 3 hints. 2 double hints.\n"
       + "Oh my god I did so badly ;-;\n"
-      + "https://cluesbysam.com\n\n"
-      + "Full Results:\n🟩🟨🟡🟠\n🟩🟩🟩🟩\n🟩🟡🟩🟨\n🟩🟠🟨🟩\n🟩🟡🟩🟨"
+      + "\nQuick Links:\nClues By Sam: https://cluesbysam.com\nAlt For Sam: https://altforsam.delete44.com\n"
+      + "\nFull Results:\n🟩🟨🟡🟠\n🟩🟩🟩🟩\n🟩🟡🟩🟨\n🟩🟠🟨🟩\n🟩🟡🟩🟨"
     );
   })
 
@@ -227,8 +256,8 @@
       generateAltText(testResults),
       "I solved the daily Clues by Sam, Jan 1st 1970 (Medium), in less than 20 minutes\n"
       + "16 correct guesses. 2 mistakes. 1 hint. 1 double hint.\n"
-      + "https://cluesbysam.com\n\n"
-      + "Full Results:\n"
+      + "\nQuick Links:\nClues By Sam: https://cluesbysam.com\nAlt For Sam: https://altforsam.delete44.com\n"
+      + "\nFull Results:\n"
       + ":large_yellow_circle::large_green_square::large_green_square::large_yellow_square:\n"
       + ":large_green_square::large_green_square::large_green_square::large_green_square:\n"
       + ":large_green_square::large_green_square::large_green_square::large_green_square:\n"
