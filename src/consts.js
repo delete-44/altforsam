@@ -44,3 +44,7 @@ export const CORRECT_REGEX = /🟩|:large_green_square:/;
 export const MISTAKE_REGEX = /🟨|:large_yellow_square:/;
 export const HINT_REGEX = /🟡|:large_yellow_circle:/;
 export const DOUBLE_HINT_REGEX = /🟠|:large_orange_circle:/;
+
+// Standard links we inject into alt text
+export const SOURCE_LINK = "https://cluesbysam.com";
+export const GENERATOR_LINK = "https://altforsam.delete44.com";

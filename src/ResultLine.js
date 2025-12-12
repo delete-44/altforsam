@@ -28,7 +28,16 @@ const PREAMBLE_REGEX = /^(I solved the daily )?Clues by Sam.*/;
  *
  * @type {RegExp}
  */
-const LINK_REGEX = /https:\/\/cluesbysam.com/;
+const SOURCE_LINK_REGEX = /https:\/\/cluesbysam\.com/;
+
+/**
+ * Regex to match the altforsam URL
+ * To match:
+ * * "https://altforsam.delete44.com/"
+ *
+ * @type {RegExp}
+ */
+const GENERATOR_LINK_REGEX = /https:\/\/altforsam\.delete44\.com/;
 
 /**
  * To match the results as declared in cluesbysam:
@@ -60,15 +69,6 @@ export class ResultLine {
   }
 
   /**
-   * Utility function for test LINK_REGEX
-   *
-   * @returns {boolean}
-   */
-  isLink() {
-    return LINK_REGEX.test(this.text);
-  }
-
-  /**
    * Utility function for test RESULT_REGEX
    *
    * @returns {boolean}
@@ -76,6 +76,19 @@ export class ResultLine {
   isResultRow() {
     // match even if there is surrounding whitespace
     return RESULT_REGEX.test(this.text);
+  }
+
+  /**
+   * Utility function to match ignored lines. Includes:
+   * * links to cluesbysam, which get injected automatically
+   * * links to altforsam, which get injected automatically
+   *
+   * @returns {boolean}
+   */
+  isIgnoredLine() {
+    return (
+      SOURCE_LINK_REGEX.test(this.text) || GENERATOR_LINK_REGEX.test(this.text)
+    );
   }
 
   /**

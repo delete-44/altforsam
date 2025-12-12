@@ -1,8 +1,10 @@
 import {
   CORRECT_KEY,
   DOUBLE_HINT_KEY,
+  GENERATOR_LINK,
   HINT_KEY,
   MISTAKE_KEY,
+  SOURCE_LINK,
 } from "./consts.js";
 import { ResultLine } from "./ResultLine.js";
 
@@ -111,14 +113,13 @@ export const generateAltText = function (results) {
       return;
     }
 
-    if (line.isLink()) {
-      if (!link) link = rawLine;
-      return;
-    }
-
     if (line.isResultRow()) {
       resultTotals = mergeCounts(resultTotals, line.counts());
       rawResultLines.push(rawLine);
+      return;
+    }
+
+    if (line.isIgnoredLine()) {
       return;
     }
 
@@ -131,9 +132,12 @@ export const generateAltText = function (results) {
   // keep original ordering: simplest is preamble, body, unknowns, link
   const parts = [];
   if (preamble) parts.push(preamble);
-  parts.push(body);
+  if (body) parts.push(body);
   if (unknownLines.length) parts.push(...unknownLines);
-  if (link) parts.push(link);
+
+  parts.push("\nQuick Links:");
+  parts.push("Clues By Sam: " + SOURCE_LINK);
+  parts.push("Alt For Sam: " + GENERATOR_LINK);
 
   if (rawResultLines.length) {
     parts.push("\nFull Results:");
