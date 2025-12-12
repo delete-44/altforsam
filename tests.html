@@ -164,6 +164,20 @@
     );
   })
 
+  it("generateAltText: ignores many copies of ignored lines", () => {
+    const testResults = "https://cluesbysam.com\n"
+      + "https://cluesbysam.com\n"
+      + "https://cluesbysam.com\n"
+      + "https://altforsam.delete44.com\n"
+      + "https://altforsam.delete44.com\n"
+      + "https://altforsam.delete44.com";
+
+    assertEqual(
+      generateAltText(testResults),
+      "\nQuick Links:\nClues By Sam: https://cluesbysam.com\nAlt For Sam: https://altforsam.delete44.com"
+    );
+  })
+
   it("generateAltText: preserves unrecognised lines", () => {
     const testResults = "hi i'm eddie";
 
