@@ -31,6 +31,8 @@ const resultsMeta = {
   [DOUBLE_HINT_KEY]: { label: "double hint" },
 };
 
+const REDDIT_LINEBREAK = "  ";
+
 /**
  * Pluralise a string with an optional suffix
  *
@@ -144,5 +146,5 @@ export const generateAltText = function (results) {
     parts.push(...rawResultLines);
   }
 
-  return parts.join("\n");
+  return parts.join(REDDIT_LINEBREAK + "\n");
 };
