@@ -117,7 +117,7 @@ export const generateAltText = function (results) {
 
     if (line.isResultRow()) {
       resultTotals = mergeCounts(resultTotals, line.counts());
-      rawResultLines.push(rawLine + REDDIT_LINEBREAK);
+      rawResultLines.push(rawLine);
       return;
     }
 
@@ -137,14 +137,14 @@ export const generateAltText = function (results) {
   if (body) parts.push(body);
   if (unknownLines.length) parts.push(...unknownLines);
 
-  parts.push("\nQuick Links:" + REDDIT_LINEBREAK);
-  parts.push("Clues By Sam: " + SOURCE_LINK + REDDIT_LINEBREAK);
-  parts.push("Alt For Sam: " + GENERATOR_LINK + REDDIT_LINEBREAK);
+  parts.push("\nQuick Links:");
+  parts.push("Clues By Sam: " + SOURCE_LINK);
+  parts.push("Alt For Sam: " + GENERATOR_LINK);
 
   if (rawResultLines.length) {
-    parts.push("\nFull Results:" + REDDIT_LINEBREAK);
+    parts.push("\nFull Results:");
     parts.push(...rawResultLines);
   }
 
-  return parts.join("\n");
+  return parts.join("\n" + REDDIT_LINEBREAK);
 };
