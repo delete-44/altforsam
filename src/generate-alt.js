@@ -31,6 +31,8 @@ const resultsMeta = {
   [DOUBLE_HINT_KEY]: { label: "double hint" },
 };
 
+const REDDIT_LINEBREAK = "  ";
+
 /**
  * Pluralise a string with an optional suffix
  *
@@ -115,7 +117,7 @@ export const generateAltText = function (results) {
 
     if (line.isResultRow()) {
       resultTotals = mergeCounts(resultTotals, line.counts());
-      rawResultLines.push(rawLine);
+      rawResultLines.push(rawLine + REDDIT_LINEBREAK);
       return;
     }
 
@@ -135,12 +137,12 @@ export const generateAltText = function (results) {
   if (body) parts.push(body);
   if (unknownLines.length) parts.push(...unknownLines);
 
-  parts.push("\nQuick Links:");
-  parts.push("Clues By Sam: " + SOURCE_LINK);
-  parts.push("Alt For Sam: " + GENERATOR_LINK);
+  parts.push("\nQuick Links:" + REDDIT_LINEBREAK);
+  parts.push("Clues By Sam: " + SOURCE_LINK + REDDIT_LINEBREAK);
+  parts.push("Alt For Sam: " + GENERATOR_LINK + REDDIT_LINEBREAK);
 
   if (rawResultLines.length) {
-    parts.push("\nFull Results:");
+    parts.push("\nFull Results:" + REDDIT_LINEBREAK);
     parts.push(...rawResultLines);
   }
 
