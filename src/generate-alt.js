@@ -146,5 +146,5 @@ export const generateAltText = function (results) {
     parts.push(...rawResultLines);
   }
 
-  return parts.join("\n" + REDDIT_LINEBREAK);
+  return parts.join(REDDIT_LINEBREAK + "\n");
 };
