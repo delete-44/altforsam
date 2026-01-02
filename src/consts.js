@@ -48,3 +48,10 @@ export const DOUBLE_HINT_REGEX = /🟠|:large_orange_circle:/;
 // Standard links we inject into alt text
 export const SOURCE_LINK = "https://cluesbysam.com";
 export const GENERATOR_LINK = "https://altforsam.delete44.com";
+
+// Injects a double empty space into line breaks;
+// this is safe for alt text as the whitespace won't be read,
+// safe for a lot of messaging platforms (ie slack) as the whitespace is stripped,
+// but formats the results correctly for reddit (where a lot of this community is):
+// https://www.reddit.com/r/help/comments/8ufk2r/line_breaks/
+export const FRIENDLY_LINE_BREAK = "  \n";
