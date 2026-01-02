@@ -1,6 +1,7 @@
 import {
   CORRECT_KEY,
   DOUBLE_HINT_KEY,
+  FRIENDLY_LINE_BREAK,
   GENERATOR_LINK,
   HINT_KEY,
   MISTAKE_KEY,
@@ -90,11 +91,10 @@ export function mergeCounts(resultTotals = {}, counts) {
  * > "I solved the daily Clues by Sam, Nov 17th 2025 (Easy), in 02:50\n🟩🟩🟩🟩\n🟩🟩🟩🟩\n🟩🟩🟩🟨\n🟩🟩🟩🟩\n🟩🟩🟩🟩\nhttps://cluesbysam.com"
 
  * @param {string} results
- * @returns {{ preamble: string; body: string; link: string; }}
+ * @returns {string} formatted alt text
  */
 export const generateAltText = function (results) {
   let preamble = "";
-  let link = "";
   const unknownLines = [];
   let resultTotals = {
     [CORRECT_KEY]: 0,
@@ -144,5 +144,5 @@ export const generateAltText = function (results) {
     parts.push(...rawResultLines);
   }
 
-  return parts.join("\n");
+  return parts.join(FRIENDLY_LINE_BREAK);
 };
