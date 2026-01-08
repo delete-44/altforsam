@@ -115,7 +115,7 @@ export const generateAltText = function (results) {
 
     if (line.isResultRow()) {
       resultTotals = mergeCounts(resultTotals, line.counts());
-      rawResultLines.push(rawLine);
+      rawResultLines.push(rawLine + "  ");
       return;
     }
 
@@ -140,7 +140,7 @@ export const generateAltText = function (results) {
   parts.push("Alt For Sam: " + GENERATOR_LINK);
 
   if (rawResultLines.length) {
-    parts.push("\nFull Results:");
+    parts.push("\nFull Results:  ");
     parts.push(...rawResultLines);
   }
 
