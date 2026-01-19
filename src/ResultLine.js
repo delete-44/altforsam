@@ -16,10 +16,12 @@ import {
  * To match:
  * * "I solved the daily Clues by Sam, Nov 17th 2025 (Easy), in 02:50"
  * * "I solved the daily Clues by Sam (Nov 14th 2025) in less than 17 minutes"
+ * * "I solved the daily #CluesBySam (Jan 1st 1970) in less than 20 minutes"
+ * * "#CluesBySam - Jan 19th 2026(Easy)"
  *
  * @type {RegExp}
  */
-const PREAMBLE_REGEX = /^#?(I solved the daily )?Clues\s?(B|b)y\s?Sam.*/;
+const PREAMBLE_REGEX = /^(I solved the daily )?#?Clues\s?(B|b)y\s?Sam.*/;
 
 /**
  * Regex to match the URL at the end of the results output
