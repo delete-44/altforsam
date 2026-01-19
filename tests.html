@@ -222,6 +222,14 @@
       generateAltText(testResults),
       expectedParts.join(FRIENDLY_LINE_BREAK)
     );
+
+    testResults = "#CluesBySam - Jan 19th 2026(Easy)\n(Medium)\nLess than 12 minutes\nhttps://cluesbysam.com";
+    expectedParts = ["#CluesBySam - Jan 19th 2026(Easy)", "(Medium)", "Less than 12 minutes", ...STANDARD_LINK_PARTS]
+
+    assertEqual(
+      generateAltText(testResults),
+      expectedParts.join(FRIENDLY_LINE_BREAK)
+    );
   })
 
   it("generateAltText: accumulates multiple rows of results", () => {

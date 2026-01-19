@@ -19,7 +19,7 @@ import {
  *
  * @type {RegExp}
  */
-const PREAMBLE_REGEX = /^(I solved the daily )?Clues by Sam.*/;
+const PREAMBLE_REGEX = /^#?(I solved the daily )?Clues\s?(B|b)y\s?Sam.*/;
 
 /**
  * Regex to match the URL at the end of the results output
